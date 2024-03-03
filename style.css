@@ -1,0 +1,7 @@
+.ready {
+    border: 1px solid green;
+}
+
+.notready {
+    border: 1px solid red;
+}

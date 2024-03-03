@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Stopwatch</title>
+    <style>
+        #timer {
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="timer">10</div>
+    <button id="startStopBtn">Start</button>
+
+    <script>
+        var timerElement = document.getElementById("timer");
+        var startStopBtn = document.getElementById("startStopBtn");
+
+        var isRunning = false;
+        var interval;
+        var seconds = 10;
+
+        function updateTimer() {
+            if (seconds >= 0) {
+                timerElement.textContent = seconds;
+                seconds--;
+            } else {
+                clearInterval(interval);
+                startStopBtn.disabled = false; // Enable the button after countdown finishes
+            }
+        }
+
+        startStopBtn.addEventListener("click", function () {
+            if (!isRunning) {
+                isRunning = true;
+                interval = setInterval(updateTimer, 1000);
+                startStopBtn.disabled = true; // Disable the button during countdown
+            }
+        });
+    </script>
+
+</body>
+
+</html>
