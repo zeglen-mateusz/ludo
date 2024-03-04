@@ -1,0 +1,157 @@
+
+.buttonr {
+    width: 20px;
+    height: 20px;
+    background-color: crimson;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.buttonr:hover {
+    background-color: darkred;
+}
+
+.buttony {
+    width: 20px;
+    height: 20px;
+    background-color: lightyellow;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.buttonry:hover {
+    background-color: darkgoldenrod;
+}
+
+.buttong {
+    width: 20px;
+    height: 20px;
+    background-color: lightgreen;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.buttong:hover {
+    background-color: darkgreen;
+}
+
+.buttonb {
+    width: 20px;
+    height: 20px;
+    background-color: lightskyblue;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.buttonb:hover {
+    background-color: darkblue;
+}
+
+.die-face {
+    width: 120px;
+    height: 120px;
+    border: 1px solid #555;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    animation: rollAnimation 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transform-style: preserve-3d;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+/* Define styles for the dots */
+.dot {
+    width: 25%;
+    height: 25%;
+    background-color: #000;
+    border-radius: 50%;
+    margin: 3px;
+    opacity: 0.8;
+}
+
+/* Define the roll animation */
+@keyframes rollAnimation {
+    0% {
+        transform: rotateX(360deg) rotateY(0deg) rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(360deg);
+    }
+}
+
+/* Define styles for the Ludo board */
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+tr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+td {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Define colors for different regions of the board */
+.red {
+    background-color: red;
+    color: white;
+
+}
+
+.green {
+    background-color: green;
+    color: white;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.blue {
+    background-color: blue;
+    color: white;
+}
+
+.gray {
+    background-color: gray;
+    color: white;
+}
+
+.redtext {
+    color: red;;
+
+}
+
+.greentext {
+    color: green;
+}
+
+.yellowtext {
+    color: yellow;
+}
+
+.bluetext {
+    color: blue;
+}
+
+.jegoTura
+{
+    border: 2px solid orange;
+}
