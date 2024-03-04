@@ -12,146 +12,11 @@ setcookie("nick", $myVariable, time() + 3600, "/"); // Cookie expires in 1 hour
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ludo Board</title>
-
+    <link rel="stylesheet" href="style2.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-    <style>
-        .buttonr {
-            width: 20px;
-            height: 20px;
-            background-color: crimson;
-            border-radius: 50%;
-            cursor: pointer;
-        }
 
-        .buttonr:hover {
-            background-color: darkred;
-        }
-
-        .buttony {
-            width: 20px;
-            height: 20px;
-            background-color: lightyellow;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .buttonry:hover {
-            background-color: darkgoldenrod;
-        }
-
-        .buttong {
-            width: 20px;
-            height: 20px;
-            background-color: lightgreen;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .buttong:hover {
-            background-color: darkgreen;
-        }
-
-        .buttonb {
-            width: 20px;
-            height: 20px;
-            background-color: lightskyblue;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .buttonb:hover {
-            background-color: darkblue;
-        }
-
-        .die-face {
-            width: 120px;
-            height: 120px;
-            border: 1px solid #555;
-            background-color: #fff;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            animation: rollAnimation 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            transform-style: preserve-3d;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
-        }
-
-        /* Define styles for the dots */
-        .dot {
-            width: 25%;
-            height: 25%;
-            background-color: #000;
-            border-radius: 50%;
-            margin: 3px;
-            opacity: 0.8;
-        }
-
-        /* Define the roll animation */
-        @keyframes rollAnimation {
-            0% {
-                transform: rotateX(360deg) rotateY(0deg) rotateZ(0deg);
-            }
-
-            100% {
-                transform: rotateX(0deg) rotateY(0deg) rotateZ(360deg);
-            }
-        }
-
-        /* Define styles for the Ludo board */
-        table {
-            border-collapse: collapse;
-            margin: auto;
-        }
-
-        tr {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: row;
-        }
-
-        td {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: row;
-            width: 50px;
-            height: 50px;
-            border: 1px solid black;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        /* Define colors for different regions of the board */
-        .red {
-            background-color: red;
-            color: white;
-
-        }
-
-        .green {
-            background-color: green;
-            color: white;
-        }
-
-        .yellow {
-            background-color: yellow;
-        }
-
-        .blue {
-            background-color: blue;
-            color: white;
-        }
-
-        .gray {
-            background-color: gray;
-            color: white;
-        }
-    </style>
 </head>
 
 <body>
@@ -442,33 +307,30 @@ setcookie("nick", $myVariable, time() + 3600, "/"); // Cookie expires in 1 hour
         }
     };
     function move(poruszony) {
-        console.log("ruszyles sie pinonkiem: " + poruszony)
+        console.log("ruszyles sie pinonkiem: " + poruszony +" o "+ rzut)
         if (ruchWykonany == 1) {
 
 
 
 
 
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "update_turn.php", true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                    // Response from the server
-                    console.log(xhr.responseText);
-                }
-            };
-            xhr.send();
+            // var xhr = new XMLHttpRequest();
+            // xhr.open("POST", "move.php", true);
+            // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            // xhr.onreadystatechange = function () {
+            //     if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            //         // Response from the server
+            //         console.log(xhr.responseText);
+            //     }
+            // };
+            // xhr.send();
         }
 
 
     }
 
     function rollDie() {
-        // Disable button during animation
         isRunning = false;
-
-
         console.log(tura)
         tura = tura + 1;
         if (tura == 5) {
@@ -538,6 +400,7 @@ setcookie("nick", $myVariable, time() + 3600, "/"); // Cookie expires in 1 hour
         });
         // Function to send AJAX request and update UI
         function fetchData() {
+            
             var myNick = getCookie("nick");
             console.log("Value of myVariable in JavaScript:", myNick);
             $.ajax({
@@ -548,23 +411,96 @@ setcookie("nick", $myVariable, time() + 3600, "/"); // Cookie expires in 1 hour
 
                     // Update UI with received data
                     $('#data-container').empty(); // Clear previous data
+                    tura = response.data.data2[0].tura;
                     response.data.data1.forEach(function (item) {
                         if (myNick == item.nick) {
-                            if (item.status == 1) {
-                                $('#data-container').append('<div class="ready">' + item.nick + '⬅TY</div>');
+                            if(item.nick == response.data.data2[0].player1b)
+                            {
+
+                                
+                                if(tura == 1){
+                                    $('#data-container').append('<div class="bluetext, jegoTura">' + item.nick + '⬅TY</div>');
+                                }
+                                else
+                                {
+                                    $('#data-container').append('<div class="bluetext">' + item.nick + '⬅TY</div>');
+                                }
+                            }else if(item.nick == response.data.data2[0].player2r)
+                            {
+                                f(tura == 2){
+                                    $('#data-container').append('<div class="bluetext, jegoTura">' + item.nick + '⬅TY</div>');
+                                }
+                                else
+                                {
+                                    $('#data-container').append('<div class="bluetext">' + item.nick + '⬅TY</div>');
+                                }
+                            }else if(item.nick == response.data.data2[0].player3g)
+                            {
+                                f(tura == 3){
+                                    $('#data-container').append('<div class="bluetext, jegoTura">' + item.nick + '⬅TY</div>');
+                                }
+                                else
+                                {
+                                    $('#data-container').append('<div class="bluetext">' + item.nick + '⬅TY</div>');
+                                }
+                            }else if(item.nick == response.data.data2[0].player4y)
+                            {
+                                f(tura == 4){
+                                    $('#data-container').append('<div class="bluetext, jegoTura">' + item.nick + '⬅TY</div>');
+                                }
+                                else
+                                {
+                                    $('#data-container').append('<div class="bluetext">' + item.nick + '⬅TY</div>');
+                                }
                             }
-                            else {
-                                $('#data-container').append('<div class="notready">' + item.nick + '⬅TY</div>');
-                            }
+    
                         }
                         else {
-                            if (item.status == 1) {
-                                $('#data-container').append('<div class="ready">' + item.nick + '</div>');
+                            if(item.nick == response.data.data2[0].player1b)
+                            {
+                                if(tura == 1){
+                                    $('#data-container').append('<div class="bluetext, jegoTura">' + item.nick + '</div>');
+                                }
+                                else
+                                {
+                                    $('#data-container').append('<div class="bluetext">' + item.nick + '</div>');
+                                }
+                                
+                            }else if(item.nick == response.data.data2[0].player2r)
+                            {
+                                if(tura == 2){
+                                    $('#data-container').append('<div class="bluetext, jegoTura">' + item.nick + '</div>');
+                                }
+                                else
+                                {
+                                    $('#data-container').append('<div class="bluetext">' + item.nick + '</div>');
+                                }
+                            }else if(item.nick == response.data.data2[0].player3g)
+                            {
+                                if(tura == 3){
+                                    $('#data-container').append('<div class="bluetext, jegoTura">' + item.nick + '</div>');
+                                }
+                                else
+                                {
+                                    $('#data-container').append('<div class="bluetext">' + item.nick + '</div>');
+                                }
                             }
-                            else {
-                                $('#data-container').append('<div class="notready">' + item.nick + '</div>');
-                            }
+                            else if(item.nick == response.data.data2[0].player4y)
+                            {
+                                if(tura == 4){
+                                    $('#data-container').append('<div class="bluetext, jegoTura">' + item.nick + '</div>');
+                                }
+                                else
+                                {
+                                    $('#data-container').append('<div class="bluetext">' + item.nick + '</div>');
+                                }} 
                         }
+                        // if (myNick == item.nick) {
+                        //         $('#data-container').append('<div >' + item.nick + '⬅TY</div>');
+                        // }
+                        // else {                     
+                        //     $('#data-container').append('<div >' + item.nick + '</div>');                      
+                        // }
                     });
                     console.error("mmm");
                     console.error(response.data);
@@ -599,7 +535,7 @@ setcookie("nick", $myVariable, time() + 3600, "/"); // Cookie expires in 1 hour
                         container.appendChild(button);
 
                     }
-
+                    
                     // Create and append buttons for player 1b
                     createAndAppendButton(response.data.data2[0].player1b1, 'buttonb', "player1b1");
                     createAndAppendButton(response.data.data2[0].player1b2, 'buttonb', "player1b2");
@@ -639,7 +575,7 @@ setcookie("nick", $myVariable, time() + 3600, "/"); // Cookie expires in 1 hour
                     }
 
 
-                    tura = response.data.data2[0].tura;
+                    
 
 
 
